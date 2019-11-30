@@ -1,0 +1,23 @@
+{
+  "name": "homebridge-watchdog",
+  "version": "0.0.1",
+  "description": "Watchdog for Homebridge: https://github.com/gagamis/homebridge-timer",
+  "license": "ISC",
+  "keywords": [
+    "homebridge-plugin"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/gagamis/homebridge-timer.git"
+  },
+  "bugs": {
+    "url": "http://github.com/gagamis/homebridge-timer/issues"
+  },
+  "engines": {
+    "node": ">=0.12.0",
+    "homebridge": ">=0.2.0"
+  },
+  "dependencies": {
+    "node-persist": "^2.1.0"
+  }
+}
