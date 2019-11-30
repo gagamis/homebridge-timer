@@ -1,9 +1,10 @@
 ## Configuration
 
 ```json
-{
-  "accessory": "WatchDog",
-  "name": "idle watchdog",
-  "interval": 60000
-}
+    "accessories": [
+        {
+            "accessory": "WatchDog",
+            "name": "idle watchdog",
+            "interval": 60000
+        },
 ```
