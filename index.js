@@ -1,4 +1,4 @@
-var Service, Characteristic, UUIDGen;
+var Service, Characteristic, ContactState, UUIDGen;
 
 module.exports = function(homebridge) {
   console.log('homebridge API version: ' + homebridge.version);
@@ -8,25 +8,31 @@ module.exports = function(homebridge) {
   Characteristic = homebridge.hap.Characteristic;
   UUIDGen = homebridge.hap.uuid;
   ContactState = homebridge.hap.Characteristic.ContactSensorState;
-  homebridge.registerAccessory('homebridge-watchdog', 'WatchDog', watchDog);
+  homebridge.registerAccessory(
+    'homebridge-watchdog',
+    'WatchDog',
+    WatchDogAccessory
+  );
 };
 
-function watchDog(log, config) {
+function WatchDogAccessory(log, config) {
   this.log = log;
   this.name = config['name'] || 'Gamis watchdog';
   this.interval = config['interval'] || 60000;
   this.contactTriggered = false;
 
-  setInterval(this.watchdogContactState.bind(this), this.interval);
+  this.service = new Service.ContactSensor(this.name);
+  setInterval(this.monitorContactState.bind(this), this.interval);
 }
 
-watchDog.prototype = {
+WatchDogAccessory.prototype = {
   identify: function(callback) {
     callback(null);
   },
 
-  watchdogContactState: function() {
+  monitorContactState: function() {
     this.contactTriggered = !this.contactTriggered;
+    this.log('setContactSensorState: ', this.contactTriggered);
     this.service
       .getCharacteristic(Characteristic.ContactSensorState)
       .setValue(this.contactTriggered);
@@ -44,7 +50,7 @@ watchDog.prototype = {
     informationService
       .setCharacteristic(Characteristic.Manufacturer, 'GAMIS Systems')
       .setCharacteristic(Characteristic.Model, 'Rev-1')
-      .setCharacteristic(Characteristic.SerialNumber, 'Version 0.0.3')
+      .setCharacteristic(Characteristic.SerialNumber, 'Version 0.0.5')
       .setCharacteristic(Characteristic.SerialNumber, 'A1S2NASF88EW');
 
     this.service

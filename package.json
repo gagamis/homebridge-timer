@@ -1,6 +1,6 @@
 {
   "name": "homebridge-watchdog",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "Watchdog for Homebridge: https://github.com/gagamis/homebridge-timer",
   "license": "ISC",
   "keywords": [
