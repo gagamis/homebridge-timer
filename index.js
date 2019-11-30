@@ -8,15 +8,6 @@ module.exports = function(homebridge) {
   Characteristic = homebridge.hap.Characteristic;
   UUIDGen = homebridge.hap.uuid;
 
-  // For platform plugin to be considered as dynamic platform plugin,
-  // registerPlatform(pluginName, platformName, constructor, dynamic), dynamic must be true
-  homebridge.registerPlatform(
-    'homebridge-samplePlatform',
-    'SamplePlatform',
-    SamplePlatform,
-    true
-  );
-
   homebridge.registerAccessory('homebridge-watchdog', 'WatchDog', watchDog);
 };
 
